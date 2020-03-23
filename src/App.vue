@@ -13,40 +13,48 @@
       <v-list dense>
         <v-list-item v-for="item in items" :key="item.title" link>
           <v-list-item-icon :class="{'mt-1': !item.mdi}">
-            <v-icon v-if="item.mdi">{{ item.icon }}</v-icon>
-            <p v-else class="headline">{{ item.icon }}</p>
+            <router-link :to="item.to">
+              <v-icon v-if="item.mdi">{{ item.icon }}</v-icon>
+              <p v-else class="headline">{{ item.icon }}</p>
+            </router-link>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <router-link :to="item.to">
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </router-link>
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
     <v-content class="ml-12 pl-8">
-      <Header />
+      <router-view />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Header from "./components/Header";
-
 export default {
   name: "App",
-  components: {
-    Header
-  },
+  components: {},
   data() {
     return {
       drawer: true,
       items: [
-        { title: "Global", icon: "mdi-earth", mdi: true },
-        { title: "Canada", icon: "🇨🇦", mdi: false },
-        { title: "About", icon: "mdi-information", mdi: true }
+        { title: "Global", icon: "mdi-earth", mdi: true, to: "/" },
+        { title: "About", icon: "mdi-information", mdi: true, to: "/about" },
+        // { title: "Canada", icon: "🇨🇦", mdi: false, to: "/" }
       ],
       mini: true
     };
   }
 };
 </script>
+
+<style scoped>
+a,
+.v-application a {
+  color: inherit;
+  text-decoration: none;
+}
+</style>
