@@ -27,7 +27,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-content class="ml-12 pl-8">
+    <v-content class="ml-12 pl-8 pr-8">
       <router-view />
     </v-content>
   </v-app>

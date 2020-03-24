@@ -23,6 +23,7 @@
       >
         <v-sheet color="grey lighten-3" height="100%">
           <div v-html="item.i"></div>
+          <OverviewLayout/>
         </v-sheet>
       </grid-item>
     </grid-layout>
@@ -31,18 +32,21 @@
 
 <script>
 import VueGridLayout from "vue-grid-layout";
+import OverviewLayout from '@/components/layouts/OverviewLayout.vue'
+
 
 export default {
   components: {
     GridLayout: VueGridLayout.GridLayout,
-    GridItem: VueGridLayout.GridItem
+    GridItem: VueGridLayout.GridItem,
+    OverviewLayout
   },
   data: function() {
     return {
       layout: [
         { x: 0, y: 0, w: 2, h: 2, i: "0" },
         { x: 2, y: 0, w: 2, h: 4, i: "1" },
-        { x: 4, y: 0, w: 2, h: 5, i: "2" },
+        { x: 4, y: 0, w: 2, h: 5, i: `<h1><OverviewLayout/></h1>` },
         { x: 6, y: 0, w: 2, h: 3, i: "3" },
         { x: 8, y: 0, w: 2, h: 3, i: `<h1>Hello</h1>` }
       ]
