@@ -27,30 +27,32 @@
         </v-sheet>
       </grid-item>
     </grid-layout>
+    <!-- <BarChart/> -->
   </div>
 </template>
 
 <script>
 import VueGridLayout from "vue-grid-layout";
 import OverviewLayout from "@/components/layouts/OverviewLayout.vue";
+import GlobalTable from '@/components/GlobalTable.vue';
 import LineChart from "@/components/layouts/LineChart.vue";
+// import BarChart from "@/components/layouts/BarChart.vue";
 
 export default {
   components: {
     GridLayout: VueGridLayout.GridLayout,
     GridItem: VueGridLayout.GridItem,
     OverviewLayout,
-    LineChart
+    LineChart,
+    GlobalTable
+    // BarChart
   },
   data: function() {
     return {
       // you have to define x, y, w, h, i or else the grid will not work
       layout: [
-        { x: 0, y: 0, w: 3, h: 5, i: "0", resizable: false, content: "OverviewLayout" },
-        { x: 2, y: 0, w: 2, h: 4, i: "1", resizable: null, content: "LineChart" },
-        { x: 4, y: 0, w: 2, h: 5, i: "2", resizable: null, content: "LineChart" },
-        { x: 6, y: 0, w: 2, h: 3, i: "3", resizable: null, content: "LineChart" },
-        { x: 8, y: 0, w: 2, h: 3, i: "4", resizable: null, content: "LineChart" }
+        { x: 0, y: 0, w: 9, h: 13, i: "1", resizable: null, content: "GlobalTable" },
+        // { x: 9, y: 0, w: 3, h: 5, i: "0", resizable: false, content: "OverviewLayout" }
       ]
     };
   }
