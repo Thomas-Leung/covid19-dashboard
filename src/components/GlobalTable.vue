@@ -1,22 +1,53 @@
 <template>
-  <div class="wrap">
-    <table id="table">
-      <thead>
-        <tr>
-          <th v-for="(col, index) in columns" :key="index">
-            <!-- Use v-if because of countryInfo in our data -->
-            <div v-if="col !== 'countryInfo'">{{col}}</div>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(row, index) in rows" :key="index" style="height: 90px;">
-          <td v-for="(col, index) in columns" :key="index">
-            <div v-if="col !== 'countryInfo'">{{row[col]}}</div>
+  <div class="content">
+    <div class="search-layout">
+      <p class="ma-4 title">Global Statistic</p>
+
+      <div style="background:white; margin: 12px 16px 12px 10px; border-radius:20px; width: 40%">
+        <v-text-field
+          solo
+          dense
+          filled
+          clearable
+          @click:clear="query = ''"
+          single-line
+          hide-details
+          color="grey darken-2"
+          background-color="grey lighten-5"
+          prepend-inner-icon="mdi-magnify"
+          v-model="query"
+        ></v-text-field>
+      </div>
+    </div>
+    <div class="wrap">
+      <table id="table">
+        <thead>
+          <tr>
+            <th v-for="(col, index) in columns" :key="index" class="subtitle-1 font-weight-medium">
+              <!-- Use v-if because of countryInfo in our data -->
+              <div v-if="col === 'countryInfo'">flag</div>
+              <!-- Capitalize the first letter -->
+              <div v-else>{{col.charAt(0).toUpperCase() + col.substring(1)}}</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(row, index) in computedList" :key="index">
+            <td v-for="(col, index) in columns" :key="index">
+              <div v-if="col === 'countryInfo'">
+                <img :src="row['countryInfo']['flag']" alt="flag" height="14vh" />
+              </div>
+              <div v-else>{{row[col]}}</div>
+            </td>
+          </tr>
+          <td v-if="this.computedList.length === 0" colspan="100%">
+            <p class="body-1 pt-2">
+              <v-icon>mdi-earth-off</v-icon> No country
+            </p>
           </td>
-        </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -24,6 +55,7 @@
 export default {
   data: function() {
     return {
+      query: "",
       rows: [
         {
           country: "China",
@@ -209,20 +241,68 @@ export default {
     }
   },
   computed: {
+    // used to get the number of columns
     columns: function columns() {
       if (this.rows.length == 0) {
         return [];
       }
       // return a list of JSON keys
       return Object.keys(this.rows[0]);
+    },
+    // search functionality
+    computedList: function() {
+      var vm = this;
+      return this.rows.filter(function(row) {
+        // if match will be zero
+        console.log(row);
+        return (
+          row["country"].toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+        );
+      });
     }
   }
 };
 </script>
 
 <style scoped>
+td {
+  text-align: center;
+  padding: 8px;
+}
+
+table {
+  margin: 0px 8px 40px 8px;
+  border-collapse: collapse;
+  width: 98%;
+}
+
+table,
+td,
+th {
+  border: 2px solid grey;
+}
+
 .wrap {
   height: 100%;
   overflow: auto;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.wrap::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE and Edge */
+.wrap {
+  -ms-overflow-style: none;
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.search-layout {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

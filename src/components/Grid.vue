@@ -1,6 +1,6 @@
 <template>
   <div class="grid-content">
-    <h1>Overview</h1>
+    <h1 class="ml-3">Overview</h1>
     <grid-layout
       :layout.sync="layout"
       :col-num="12"
@@ -22,7 +22,7 @@
         :key="item.i"
         :isResizable="item.resizable"
       >
-        <v-sheet color="grey lighten-3" height="100%" style="border-radius:15px;">
+        <v-sheet color="blue-grey lighten-5" height="100%" style="border-radius:15px;">
           <component v-bind:is="item.content" class="tab"></component>
         </v-sheet>
       </grid-item>
@@ -51,8 +51,8 @@ export default {
     return {
       // you have to define x, y, w, h, i or else the grid will not work
       layout: [
-        { x: 0, y: 0, w: 9, h: 13, i: "1", resizable: null, content: "GlobalTable" },
-        // { x: 9, y: 0, w: 3, h: 5, i: "0", resizable: false, content: "OverviewLayout" }
+        { x: 0, y: 0, w: 3, h: 5, i: "0", resizable: false, content: "OverviewLayout" },
+        { x: 3, y: 0, w: 9, h: 13, i: "1", resizable: null, content: "GlobalTable" },
       ]
     };
   }
