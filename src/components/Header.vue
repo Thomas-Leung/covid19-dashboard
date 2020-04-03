@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col class="mb-n4">
-      <h1 class="font-weight-bold mb-3 ml-3 mt-8">COVID-19 Dashboard</h1>
+      <h1 class="font-weight-bold mb-3 ml-3 mt-2">COVID-19 Dashboard</h1>
       <h3 class="ml-3 mt-n4 mb-2">Overview</h3>
       <v-divider color="grey" class="mx-3 mb-6"></v-divider>
     </v-col>

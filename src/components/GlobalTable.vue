@@ -96,7 +96,6 @@ export default {
     axios
       .get(`https://corona.lmao.ninja/countries`)
       .then(response => {
-        console.log(response.data);
         this.rows = response.data;
       })
       .catch(e => {
@@ -117,7 +116,6 @@ export default {
       var vm = this;
       return this.rows.filter(function(row) {
         // if match will be zero
-        console.log(row);
         return (
           row["country"].toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
         );

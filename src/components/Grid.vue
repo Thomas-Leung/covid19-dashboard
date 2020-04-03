@@ -33,7 +33,7 @@
 <script>
 import VueGridLayout from "vue-grid-layout";
 import OverviewLayout from "@/components/layouts/OverviewLayout.vue";
-import BarChart from "@/components/layouts/BarChart.vue";
+import PieChartW from "@/components/layouts/PieChartW.vue";
 import LineChart from "@/components/layouts/LineChart.vue";
 import GlobalTable from "@/components/GlobalTable.vue";
 
@@ -42,7 +42,7 @@ export default {
     GridLayout: VueGridLayout.GridLayout,
     GridItem: VueGridLayout.GridItem,
     OverviewLayout,
-    BarChart,
+    PieChartW,
     LineChart,
     GlobalTable
   },
@@ -52,9 +52,9 @@ export default {
       // you have to define x, y, w, h, i or else the grid will not work
       layout: [
         { x: 0, y: 0, w: 3, h: 5, i: "0", resizable: false, content: "OverviewLayout" },
-        { x: 0, y: 4, w: 3, h: 7, i: "1", resizable: null, content: "BarChart" },
+        { x: 0, y: 4, w: 3, h: 10, i: "1", resizable: null, content: "PieChartW" },
         { x: 3, y: 0, w: 9, h: 12, i: "2", resizable: null, content: "LineChart" },
-        { x: 0, y: 12, w: 12, h: 14, i: "4", resizable: null, content: "GlobalTable" },
+        { x: 0, y: 15, w: 12, h: 14, i: "4", resizable: null, content: "GlobalTable" },
       ]
     };
   }
