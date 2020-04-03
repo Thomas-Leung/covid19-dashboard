@@ -39,7 +39,6 @@ export default {
     axios
       .get(`https://corona.lmao.ninja/all`)
       .then(response => {
-        console.log(response.data);
         this.cases = response.data["cases"];
         this.deaths = response.data["deaths"];
         this.recovered = response.data["recovered"];

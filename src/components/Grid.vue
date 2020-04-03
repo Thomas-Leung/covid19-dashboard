@@ -52,9 +52,9 @@ export default {
       // you have to define x, y, w, h, i or else the grid will not work
       layout: [
         { x: 0, y: 0, w: 3, h: 5, i: "0", resizable: false, content: "OverviewLayout" },
-        { x: 0, y: 4, w: 3, h: 10, i: "1", resizable: null, content: "PieChartW" },
-        { x: 3, y: 0, w: 9, h: 12, i: "2", resizable: null, content: "LineChart" },
-        { x: 0, y: 15, w: 12, h: 14, i: "4", resizable: null, content: "GlobalTable" },
+        { x: 0, y: 4, w: 3, h: 11, i: "1", resizable: null, content: "PieChartW" },
+        { x: 3, y: 0, w: 9, h: 16, i: "2", resizable: null, content: "LineChart" },
+        { x: 0, y: 16, w: 12, h: 16, i: "4", resizable: null, content: "GlobalTable" },
       ]
     };
   }
