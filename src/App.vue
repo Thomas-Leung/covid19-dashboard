@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" absolute permanent>
+    <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" fixed permanent>
       <v-list-item class="px-2">
         <v-icon class="pr-2 pl-2">mdi-desktop-mac-dashboard</v-icon>
         <v-list-item-title>COVID19 Dashboard</v-list-item-title>
@@ -51,10 +51,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 a,
 .v-application a {
   color: inherit;
   text-decoration: none;
+}
+
+html {
+  overflow: auto;
+  min-width: 1280px;
 }
 </style>
