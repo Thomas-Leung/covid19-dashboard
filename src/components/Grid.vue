@@ -1,6 +1,5 @@
 <template>
   <div class="grid-content">
-    <h1 class="ml-3">Overview</h1>
     <grid-layout
       class="mb-8"
       :layout.sync="layout"
