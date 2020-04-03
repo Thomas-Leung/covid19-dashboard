@@ -1,7 +1,7 @@
 <template>
-  <div class="content">
+  <div class="content" align="center">
     <div class="search-layout">
-      <p class="ma-4 title">Global Statistic</p>
+      <p class="ma-4 title">Global Statistic <span class="overline ml-3">*click table to sort</span></p>
 
       <div style="background:white; margin: 12px 16px 12px 10px; border-radius:20px; width: 40%">
         <v-text-field
@@ -9,6 +9,7 @@
           dense
           filled
           clearable
+          label="search country"
           @click:clear="query = ''"
           single-line
           hide-details
@@ -23,11 +24,18 @@
       <table id="table">
         <thead>
           <tr>
-            <th v-for="(col, index) in columns" :key="index" class="subtitle-1 font-weight-medium">
+            <th
+              v-for="(col, index) in columns"
+              :key="index"
+              class="subtitle-1 font-weight-medium"
+              @click="sortTable(col)"
+            >
               <!-- Use v-if because of countryInfo in our data -->
-              <div v-if="col === 'countryInfo'">flag</div>
+              <div v-if="col === 'countryInfo'" class="pt-3 pb-4">flag</div>
               <!-- Capitalize the first letter -->
-              <div v-else>{{col.charAt(0).toUpperCase() + col.substring(1)}}</div>
+              <div v-else>{{col.charAt(0).toUpperCase() + col.substring(1)}}<br>
+              <v-icon v-if="ascending && col == sortColumn">mdi-menu-up</v-icon>
+              <v-icon v-else-if="col == sortColumn">mdi-menu-down</v-icon></div>
             </th>
           </tr>
         </thead>
@@ -37,12 +45,13 @@
               <div v-if="col === 'countryInfo'">
                 <img :src="row['countryInfo']['flag']" alt="flag" height="14vh" />
               </div>
+              <div v-else-if="col === 'updated'">{{new Date(row[col]).toISOString().split('T')[0]}}</div>
               <div v-else>{{row[col]}}</div>
             </td>
           </tr>
           <td v-if="this.computedRows.length === 0" colspan="100%">
             <p class="body-1 pt-2">
-              <v-icon>mdi-earth-off</v-icon> No country
+              <v-icon>mdi-earth-off</v-icon>No country
             </p>
           </td>
         </tbody>
@@ -52,27 +61,38 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   data: function() {
     return {
       query: "",
-      rows: []
+      rows: [],
+      ascending: false,
+      sortColumn: ""
     };
   },
   methods: {
-    sortTable: function sortTable(col) {
+    sortTable: function(col) {
+      if (this.sortColumn === col) {
+        this.ascending = !this.ascending;
+      } else {
+        this.ascending = true;
+        this.sortColumn = col;
+      }
+
+      var ascending = this.ascending;
+
       this.rows.sort(function(a, b) {
         if (a[col] > b[col]) {
-          return 1;
+          return ascending ? 1 : -1;
         } else if (a[col] < b[col]) {
-          return -1;
+          return ascending ? -1 : 1;
         }
         return 0;
       });
     }
   },
-    mounted() {
+  mounted() {
     axios
       .get(`https://corona.lmao.ninja/countries`)
       .then(response => {
@@ -108,20 +128,37 @@ export default {
 </script>
 
 <style scoped>
-td {
-  text-align: center;
-  padding: 2px;
-}
-
 table {
-  margin: 0px 8px 10% 4px;
-  border-collapse: collapse;
+  width: 95%;
+  text-align: center;
+  margin: 0px 8px 2vh 4px;
+  border-collapse: separate; /* Don't collapse */
+  border-spacing: 0;
 }
 
-table,
-td,
-th {
-  border: 2px solid grey;
+table th {
+  /* Apply both top and bottom borders to the <th> */
+  border-top: 3px solid;
+  border-bottom: 3px solid;
+  border-right: 2px solid;
+}
+
+table td {
+  /* For cells, apply the border to one of each side only (right but not left, bottom but not top) */
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+table th:first-child,
+table td:first-child {
+  /* Apply a left border on the first <td> or <th> in a row */
+  border-left: 2px solid;
+}
+
+table thead th {
+  position: sticky;
+  top: 0;
+  background-color: rgb(198, 198, 199);
 }
 
 .wrap {
@@ -141,10 +178,12 @@ th {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  padding-bottom: 60px;
 }
 
 .search-layout {
   display: flex;
   justify-content: space-between;
+  padding: 0px 20px;
 }
 </style>

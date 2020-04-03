@@ -2,6 +2,7 @@
   <div class="grid-content">
     <h1 class="ml-3">Overview</h1>
     <grid-layout
+      class="mb-8"
       :layout.sync="layout"
       :col-num="12"
       :row-height="30"
@@ -27,32 +28,34 @@
         </v-sheet>
       </grid-item>
     </grid-layout>
-    <!-- <BarChart/> -->
   </div>
 </template>
 
 <script>
 import VueGridLayout from "vue-grid-layout";
 import OverviewLayout from "@/components/layouts/OverviewLayout.vue";
-import GlobalTable from '@/components/GlobalTable.vue';
+import BarChart from "@/components/layouts/BarChart.vue";
 import LineChart from "@/components/layouts/LineChart.vue";
-// import BarChart from "@/components/layouts/BarChart.vue";
+import GlobalTable from "@/components/GlobalTable.vue";
 
 export default {
   components: {
     GridLayout: VueGridLayout.GridLayout,
     GridItem: VueGridLayout.GridItem,
     OverviewLayout,
+    BarChart,
     LineChart,
     GlobalTable
-    // BarChart
   },
   data: function() {
     return {
+      // prettier-ignore
       // you have to define x, y, w, h, i or else the grid will not work
       layout: [
         { x: 0, y: 0, w: 3, h: 5, i: "0", resizable: false, content: "OverviewLayout" },
-        { x: 3, y: 0, w: 9, h: 13, i: "1", resizable: null, content: "GlobalTable" },
+        { x: 0, y: 4, w: 3, h: 7, i: "1", resizable: null, content: "BarChart" },
+        { x: 3, y: 0, w: 9, h: 12, i: "2", resizable: null, content: "LineChart" },
+        { x: 0, y: 12, w: 12, h: 14, i: "4", resizable: null, content: "GlobalTable" },
       ]
     };
   }
