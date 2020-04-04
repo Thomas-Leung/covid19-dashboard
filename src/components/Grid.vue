@@ -34,7 +34,7 @@
 import VueGridLayout from "vue-grid-layout";
 import OverviewLayout from "@/components/layouts/OverviewLayout.vue";
 import PieChartW from "@/components/layouts/PieChartW.vue";
-import LineChart from "@/components/layouts/LineChart.vue";
+import LineChartW from "@/components/layouts/LineChartW.vue";
 import GlobalTable from "@/components/GlobalTable.vue";
 
 export default {
@@ -43,7 +43,7 @@ export default {
     GridItem: VueGridLayout.GridItem,
     OverviewLayout,
     PieChartW,
-    LineChart,
+    LineChartW,
     GlobalTable
   },
   data: function() {
@@ -53,7 +53,7 @@ export default {
       layout: [
         { x: 0, y: 0, w: 3, h: 5, i: "0", resizable: false, content: "OverviewLayout" },
         { x: 0, y: 4, w: 3, h: 11, i: "1", resizable: null, content: "PieChartW" },
-        { x: 3, y: 0, w: 9, h: 16, i: "2", resizable: null, content: "LineChart" },
+        { x: 3, y: 0, w: 9, h: 16, i: "2", resizable: null, content: "LineChartW" },
         { x: 0, y: 16, w: 12, h: 16, i: "4", resizable: null, content: "GlobalTable" },
       ]
     };
