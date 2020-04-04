@@ -1,11 +1,13 @@
 <template>
   <div class="line-chart-content">
+    <button @click="fillData()">Randomize</button>
     <line-chart
       v-if="ready"
       class="line-chart"
-      :chartdata="this.chartdata"
+      :chartData="this.chartData"
       :options="this.options"
     />
+    {{selectedCountry}}
   </div>
 </template>
 
@@ -13,12 +15,29 @@
 import LineChart from "@/components/layouts/LineChart.vue";
 
 export default {
+  props: {
+    selectedCountry: {
+      type: String,
+      default: "USA"
+    }
+  },
   components: {
     LineChart
   },
   data: function() {
     return {
-      chartdata: {
+      chartData: null,
+      options: null,
+      ready: false
+    };
+  },
+  methods: {
+    getRandomInt() {
+      console.log("click");
+      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
+    },
+    fillData() {
+      this.chartData = {
         labels: [
           "Mercury",
           "Venus",
@@ -33,20 +52,30 @@ export default {
           {
             // another line graph
             label: "Planet Mass (x1,000 km)",
-            data: [4.8, 12.1, 12.7, 6.7, 139.8, 116.4, 50.7, 49.2],
-            backgroundColor: [
-              "rgba(56, 139, 239,.5)" // Green
+            data: [
+              this.getRandomInt(),
+              this.getRandomInt(),
+              this.getRandomInt(),
+              6.7,
+              139.8,
+              116.4,
+              50.7,
+              49.2
             ],
+            backgroundColor: ["rgba(56, 139, 239,.5)"],
             borderColor: ["rgba(56, 139, 239)"],
             borderWidth: 3
           }
         ]
-      },
-      options: {
+      };
+    },
+    fillOptions(title) {
+      this.options = {
         title: {
+          text: title,
           display: true,
           fontSize: 16,
-          padding: 20,
+          padding: 20
         },
         responsive: true,
         maintainAspectRatio: false,
@@ -61,13 +90,13 @@ export default {
             }
           ]
         }
-      },
-      ready: false
-    };
+      };
+    }
   },
   mounted() {
-    this.options["title"]["text"] = "haha";
     this.ready = true;
+    this.fillData();
+    this.fillOptions("gaga")
   }
 };
 </script>

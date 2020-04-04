@@ -1,7 +1,10 @@
 <template>
   <div class="content" align="center">
     <div class="search-layout">
-      <p class="ma-4 title">Global Statistic <span class="overline ml-3">*click table to sort</span></p>
+      <p class="ma-4 title">
+        Global Statistic
+        <span class="overline ml-3">*click table to sort</span>
+      </p>
 
       <div style="background:white; margin: 12px 16px 12px 10px; border-radius:20px; width: 40%">
         <v-text-field
@@ -33,14 +36,22 @@
               <!-- Use v-if because of countryInfo in our data -->
               <div v-if="col === 'countryInfo'" class="pt-3 pb-4">flag</div>
               <!-- Capitalize the first letter -->
-              <div v-else>{{col.charAt(0).toUpperCase() + col.substring(1)}}<br>
-              <v-icon v-if="ascending && col == sortColumn">mdi-menu-up</v-icon>
-              <v-icon v-else-if="col == sortColumn">mdi-menu-down</v-icon></div>
+              <div v-else>
+                {{col.charAt(0).toUpperCase() + col.substring(1)}}
+                <br />
+                <v-icon v-if="ascending && col == sortColumn">mdi-menu-up</v-icon>
+                <v-icon v-else-if="col == sortColumn">mdi-menu-down</v-icon>
+              </div>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(row, index) in computedRows" :key="index">
+          <tr
+            v-for="(row, index) in computedRows"
+            :key="index"
+            @click="selectRow(row['country'], index)"
+            :class="index === selectedRow ? 'selected-row' : ''"
+          >
             <td v-for="(col, index) in columns" :key="index">
               <div v-if="col === 'countryInfo'">
                 <img :src="row['countryInfo']['flag']" alt="flag" height="14vh" />
@@ -68,7 +79,8 @@ export default {
       query: "",
       rows: [],
       ascending: false,
-      sortColumn: ""
+      sortColumn: "",
+      selectedRow: null
     };
   },
   methods: {
@@ -90,6 +102,10 @@ export default {
         }
         return 0;
       });
+    },
+    selectRow(country, index) {
+      this.selectedRow = index;
+      this.$emit("selectedCountry", country);
     }
   },
   mounted() {
@@ -157,6 +173,10 @@ table thead th {
   position: sticky;
   top: 0;
   background-color: rgb(198, 198, 199);
+}
+
+.selected-row {
+  background-color: rgba(56, 139, 239, 0.3);
 }
 
 .wrap {
