@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" absolute permanent>
+    <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" fixed permanent>
       <v-list-item class="px-2">
         <v-icon class="pr-2 pl-2">mdi-desktop-mac-dashboard</v-icon>
         <v-list-item-title>COVID19 Dashboard</v-list-item-title>
@@ -42,7 +42,7 @@ export default {
       drawer: true,
       items: [
         { title: "Global", icon: "mdi-earth", mdi: true, to: "/" },
-        { title: "About", icon: "mdi-information", mdi: true, to: "/about" },
+        // { title: "About", icon: "mdi-information", mdi: true, to: "/about" }
         // { title: "Canada", icon: "🇨🇦", mdi: false, to: "/" }
       ],
       mini: true
@@ -54,7 +54,15 @@ export default {
 <style>
 a,
 .v-application a {
-  color: inherit;
+  color: inherit !important;
   text-decoration: none;
+}
+
+/* horizontal scroll for content */
+.v-content {
+  min-width: 1280px;
+}
+body {
+  overflow-x: scroll;
 }
 </style>
