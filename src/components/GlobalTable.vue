@@ -14,6 +14,7 @@
           clearable
           label="search country"
           @click:clear="query = ''"
+          @input="selectedRow = ''"
           single-line
           hide-details
           color="grey darken-2"
@@ -132,9 +133,13 @@ export default {
       var vm = this;
       return this.rows.filter(function(row) {
         // if match will be zero
-        return (
-          row["country"].toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
-        );
+        if (vm.query !== null) {
+          return (
+            row["country"].toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+          );
+        } else {
+          return row;
+        }
       });
     }
   }
