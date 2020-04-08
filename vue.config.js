@@ -2,5 +2,7 @@ module.exports = {
   "transpileDependencies": [
     "vuetify"
   ],
-  publicPath: '/covid19-dashboard/'
+  publicPath: process.env.NODE_ENV === 'production' ?
+    '/covid19-dashboard/':
+    '/'
 }
