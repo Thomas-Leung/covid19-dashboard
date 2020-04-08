@@ -1,7 +1,12 @@
 <template>
   <div class="home">
-    <Header />
-    <Grid />
+    <mq-layout mq="mobile">
+      <p>No Mobile yet</p>
+    </mq-layout>
+    <mq-layout mq="desktop">
+      <Header />
+      <Grid />
+    </mq-layout>
   </div>
 </template>
 
