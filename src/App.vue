@@ -29,7 +29,7 @@
       </v-navigation-drawer>
     </mq-layout>
 
-    <v-content>
+    <v-content :class="$mq === 'desktop'? 'desktop-content' : ''">
       <router-view />
     </v-content>
   </v-app>
@@ -61,7 +61,7 @@ a,
 }
 
 /* horizontal scroll for content */
-.v-content {
+.desktop-content {
   min-width: 1280px;
 }
 body {
