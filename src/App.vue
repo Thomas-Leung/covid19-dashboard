@@ -29,7 +29,7 @@
       </v-navigation-drawer>
     </mq-layout>
 
-    <v-content class="ml-12 pl-5 pr-4">
+    <v-content>
       <router-view />
     </v-content>
   </v-app>

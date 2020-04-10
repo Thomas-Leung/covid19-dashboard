@@ -2,7 +2,6 @@
   <div class="grid-content">
     <grid-layout
       class="mb-8"
-      responsive
       :layout.sync="layout"
       :col-num="12"
       :row-height="30"
