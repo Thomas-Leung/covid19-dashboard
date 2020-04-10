@@ -1,5 +1,5 @@
 <template>
-  <div class="mobile-content">
+  <div class="mobile-content mx-6">
     <HeaderMobile />
     <GithubCard />
   </div>
