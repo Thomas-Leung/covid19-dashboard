@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <mq-layout mq="mobile">
-      <p>No Mobile yet</p>
+      <GridMobile />
     </mq-layout>
     <mq-layout mq="desktop">
       <Header />
@@ -12,12 +12,14 @@
 
 <script>
 // @ is an alias to /src
+import GridMobile from "@/components/GridMobile.vue";
 import Header from "@/components/Header.vue";
 import Grid from "@/components/Grid.vue";
 
 export default {
   name: "Home",
   components: {
+    GridMobile,
     Header,
     Grid
   }
