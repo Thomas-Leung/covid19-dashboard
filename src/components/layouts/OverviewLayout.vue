@@ -37,7 +37,7 @@ import axios from "axios";
 export default {
   mounted() {
     axios
-      .get(`https://corona.lmao.ninja/all`)
+      .get(`https://corona.lmao.ninja/v2/all`)
       .then(response => {
         this.cases = response.data["cases"];
         this.deaths = response.data["deaths"];

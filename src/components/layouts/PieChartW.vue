@@ -23,7 +23,7 @@ export default {
   methods: {},
   mounted() {
     axios
-      .get(`https://corona.lmao.ninja/countries`)
+      .get(`https://corona.lmao.ninja/v2/countries`)
       .then(response => {
         this.allCountries = response.data;
         // sort in decensing order by cases in country
